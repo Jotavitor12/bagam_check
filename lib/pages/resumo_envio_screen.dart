@@ -1,14 +1,17 @@
+// lib/pages/resumo_envio_screen.dart
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
-import '../../data/models.dart';
-import '../../core/utils/pdf_generator.dart';
-import '../../core/utils/email_helper.dart';
+import '../data/models.dart';
+import '../core/utils/pdf_generator.dart';
+import '../core/utils/email_helper.dart';
 
 class ResumoEnvioScreen extends StatelessWidget {
   final String placaCavalo;
   final String placa1Semireboque;
-  final List<Grupo> grupos;
   final String nomeMotorista;
+  final String r3;
+  final String transportadora;
+  final List<Grupo> grupos;
   final Uint8List? assinaturaMotorista;
   final Uint8List? assinaturaOperador;
 
@@ -17,6 +20,8 @@ class ResumoEnvioScreen extends StatelessWidget {
     required this.placaCavalo,
     required this.placa1Semireboque,
     required this.nomeMotorista,
+    required this.r3,
+    required this.transportadora,
     required this.grupos,
     this.assinaturaMotorista,
     this.assinaturaOperador,
@@ -37,6 +42,10 @@ class ResumoEnvioScreen extends StatelessWidget {
 
     final body = '''
 Checklist realizado para veículo $placaCavalo / $placa1Semireboque
+
+Motorista: $nomeMotorista
+R3: $r3
+Transportadora: $transportadora
 
 Itens NÃO CONFORMES:
 $nokResumo
@@ -65,11 +74,16 @@ $nokResumo
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            Text('Motorista: $nomeMotorista'),
+            Text('R3: $r3'),
+            Text('Transportadora: $transportadora'),
             Text('Placa Cavalo: $placaCavalo'),
             Text('Placa 1º SR: $placa1Semireboque'),
             const SizedBox(height: 16),
+
             const Text('Itens Não Conformes:', style: TextStyle(fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),
+
             Expanded(
               child: nokItems.isEmpty
                   ? const Text('Nenhum item marcado como NOK.')
@@ -80,10 +94,14 @@ $nokResumo
                   return ListTile(
                     title: Text(item.nome),
                     subtitle: item.observacao != null ? Text(item.observacao!) : null,
+                    leading: item.foto != null
+                        ? Image.memory(item.foto!, width: 50, height: 50, fit: BoxFit.cover)
+                        : null,
                   );
                 },
               ),
             ),
+
             const SizedBox(height: 16),
             ElevatedButton.icon(
               onPressed: () => _enviarChecklist(context),

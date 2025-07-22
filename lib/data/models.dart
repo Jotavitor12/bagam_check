@@ -1,14 +1,19 @@
+// lib/data/models.dart
+import 'dart:typed_data';
+
 class ChecklistItem {
   final String nome;
-  String status; // OK / NOK / N/A
+  String status; // OK / NOK / NA
   String? observacao;
   final String prazoBloqueio;
+  Uint8List? foto; // foto do item NOK
 
   ChecklistItem({
     required this.nome,
     this.status = '',
     this.observacao,
     required this.prazoBloqueio,
+    this.foto,
   });
 }
 

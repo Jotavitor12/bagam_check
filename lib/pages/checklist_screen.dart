@@ -1,10 +1,24 @@
+// lib/pages/checklist_screen.dart
 import 'package:flutter/material.dart';
 import '../data/checklist_data.dart';
 import '../widgets/grupo_widget.dart';
 import 'assinatura_screen.dart';
 
 class ChecklistScreen extends StatefulWidget {
-  const ChecklistScreen({super.key});
+  final String nomeMotorista;
+  final String placaCavalo;
+  final String placa1Semireboque;
+  final String r3;
+  final String transportadora;
+
+  const ChecklistScreen({
+    super.key,
+    required this.nomeMotorista,
+    required this.placaCavalo,
+    required this.placa1Semireboque,
+    required this.r3,
+    required this.transportadora,
+  });
 
   @override
   State<ChecklistScreen> createState() => _ChecklistScreenState();
@@ -24,9 +38,11 @@ class _ChecklistScreenState extends State<ChecklistScreen> with TickerProviderSt
       context,
       MaterialPageRoute(
         builder: (_) => AssinaturaScreen(
-          placaCavalo: 'ABC1234',
-          placa1Semireboque: 'DEF5678',
-          nomeMotorista: 'João Vitor',
+          nomeMotorista: widget.nomeMotorista,
+          placaCavalo: widget.placaCavalo,
+          placa1Semireboque: widget.placa1Semireboque,
+          r3: widget.r3,
+          transportadora: widget.transportadora,
           grupos: grupos,
         ),
       ),
@@ -41,6 +57,9 @@ class _ChecklistScreenState extends State<ChecklistScreen> with TickerProviderSt
         bottom: TabBar(
           controller: _tabController,
           isScrollable: true,
+          labelColor: Colors.green,
+          unselectedLabelColor: Colors.white,
+          indicatorColor: Colors.green,
           tabs: grupos.map((g) => Tab(text: g.nome)).toList(),
         ),
       ),

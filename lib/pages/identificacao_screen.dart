@@ -10,30 +10,24 @@ class IdentificacaoScreen extends StatefulWidget {
 
 class _IdentificacaoScreenState extends State<IdentificacaoScreen> {
   final _formKey = GlobalKey<FormState>();
+  final _motoristaController = TextEditingController();
   final _placaCavaloController = TextEditingController();
-  final _codSapController = TextEditingController();
-  final _placa1SemirreboqueController = TextEditingController();
-  final _placa2SemirreboqueController = TextEditingController();
-  final _condutorController = TextEditingController();
+  final _placa1SRController = TextEditingController();
+  final _r3Controller = TextEditingController();
   final _transportadoraController = TextEditingController();
 
-  @override
-  void dispose() {
-    _placaCavaloController.dispose();
-    _codSapController.dispose();
-    _placa1SemirreboqueController.dispose();
-    _placa2SemirreboqueController.dispose();
-    _condutorController.dispose();
-    _transportadoraController.dispose();
-    super.dispose();
-  }
-
-  void _proximo() {
+  void _avancar() {
     if (_formKey.currentState!.validate()) {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (_) => const ChecklistScreen(),
+          builder: (_) => ChecklistScreen(
+            nomeMotorista: _motoristaController.text,
+            placaCavalo: _placaCavaloController.text,
+            placa1Semireboque: _placa1SRController.text,
+            r3: _r3Controller.text,
+            transportadora: _transportadoraController.text,
+          ),
         ),
       );
     }
@@ -42,59 +36,20 @@ class _IdentificacaoScreenState extends State<IdentificacaoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Dados do Veículo - Condutor')),
+      appBar: AppBar(title: const Text('Identificação')),
       body: Padding(
         padding: const EdgeInsets.all(24),
         child: Form(
           key: _formKey,
-          child: ListView(
+          child: Column(
             children: [
-              TextFormField(
-                controller: _condutorController,
-                decoration: const InputDecoration(labelText: 'Nome do Condutor *'),
-                validator: (value) =>
-                value == null || value.isEmpty ? 'Obrigatório' : null,
-              ),
-              const SizedBox(height: 10),
-              TextFormField(
-                controller: _codSapController,
-                decoration: const InputDecoration(labelText: 'Código SAP (R3) *'),
-                validator: (value) =>
-                value == null || value.isEmpty ? 'Obrigatório' : null,
-              ),
-              const SizedBox(height: 10),
-              TextFormField(
-                controller: _placaCavaloController,
-                decoration: const InputDecoration(labelText: 'Placa do Cavalo'),
-              ),
-              const SizedBox(height: 10),
-              TextFormField(
-                controller: _placa1SemirreboqueController,
-                decoration:
-                const InputDecoration(labelText: 'Placa do 1º Semirreboque *'),
-                validator: (value) =>
-                value == null || value.isEmpty ? 'Obrigatório' : null,
-              ),
-              const SizedBox(height: 10),
-              TextFormField(
-                controller: _placa2SemirreboqueController,
-                decoration:
-                const InputDecoration(labelText: 'Placa do 2º Semirreboque *'),
-                validator: (value) =>
-                value == null || value.isEmpty ? 'Obrigatório' : null,
-              ),
-              const SizedBox(height: 10),
-              TextFormField(
-                controller: _transportadoraController,
-                decoration: const InputDecoration(labelText: 'Transportadora *'),
-                validator: (value) =>
-                value == null || value.isEmpty ? 'Obrigatório' : null,
-              ),
-              const SizedBox(height: 32),
-              ElevatedButton(
-                onPressed: _proximo,
-                child: const Text('Avançar para Checklist'),
-              ),
+              TextFormField(controller: _motoristaController, decoration: const InputDecoration(labelText: 'Nome do Motorista'), validator: (value) => value!.isEmpty ? 'Preencha este campo' : null),
+              TextFormField(controller: _placaCavaloController, decoration: const InputDecoration(labelText: 'Placa Cavalo'), validator: (value) => value!.isEmpty ? 'Preencha este campo' : null),
+              TextFormField(controller: _placa1SRController, decoration: const InputDecoration(labelText: 'Placa 1º SR'), validator: (value) => value!.isEmpty ? 'Preencha este campo' : null),
+              TextFormField(controller: _r3Controller, decoration: const InputDecoration(labelText: 'R3'), validator: (value) => value!.isEmpty ? 'Preencha este campo' : null),
+              TextFormField(controller: _transportadoraController, decoration: const InputDecoration(labelText: 'Transportadora'), validator: (value) => value!.isEmpty ? 'Preencha este campo' : null),
+              const SizedBox(height: 24),
+              ElevatedButton(onPressed: _avancar, child: const Text('Avançar para Checklist')),
             ],
           ),
         ),

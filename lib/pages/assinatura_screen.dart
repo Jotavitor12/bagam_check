@@ -1,7 +1,8 @@
+// lib/pages/assinatura_screen.dart
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:signature/signature.dart';
-import '../../data/models.dart';
+import '../data/models.dart';
 import '../widgets/signature_widget.dart';
 import 'resumo_envio_screen.dart';
 
@@ -9,6 +10,8 @@ class AssinaturaScreen extends StatefulWidget {
   final String placaCavalo;
   final String placa1Semireboque;
   final String nomeMotorista;
+  final String r3;
+  final String transportadora;
   final List<Grupo> grupos;
 
   const AssinaturaScreen({
@@ -16,6 +19,8 @@ class AssinaturaScreen extends StatefulWidget {
     required this.placaCavalo,
     required this.placa1Semireboque,
     required this.nomeMotorista,
+    required this.r3,
+    required this.transportadora,
     required this.grupos,
   });
 
@@ -45,6 +50,8 @@ class _AssinaturaScreenState extends State<AssinaturaScreen> {
           placaCavalo: widget.placaCavalo,
           placa1Semireboque: widget.placa1Semireboque,
           nomeMotorista: widget.nomeMotorista,
+          r3: widget.r3,
+          transportadora: widget.transportadora,
           grupos: widget.grupos,
           assinaturaMotorista: motoristaBytes,
           assinaturaOperador: operadorBytes,
