@@ -1,6 +1,6 @@
 class ChecklistItem {
   final String nome;
-  String status; // OK / NOK / NA
+  String status; // OK / NOK / N/A
   String? observacao;
   final String prazoBloqueio;
 

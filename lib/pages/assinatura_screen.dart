@@ -1,8 +1,57 @@
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
+import 'package:signature/signature.dart';
+import '../../data/models.dart';
+import '../widgets/signature_widget.dart';
 import 'resumo_envio_screen.dart';
 
-class AssinaturaScreen extends StatelessWidget {
-  const AssinaturaScreen({super.key});
+class AssinaturaScreen extends StatefulWidget {
+  final String placaCavalo;
+  final String placa1Semireboque;
+  final String nomeMotorista;
+  final List<Grupo> grupos;
+
+  const AssinaturaScreen({
+    super.key,
+    required this.placaCavalo,
+    required this.placa1Semireboque,
+    required this.nomeMotorista,
+    required this.grupos,
+  });
+
+  @override
+  State<AssinaturaScreen> createState() => _AssinaturaScreenState();
+}
+
+class _AssinaturaScreenState extends State<AssinaturaScreen> {
+  final SignatureController _motoristaController = SignatureController(penStrokeWidth: 2, penColor: Colors.black);
+  final SignatureController _operadorController = SignatureController(penStrokeWidth: 2, penColor: Colors.black);
+
+  @override
+  void dispose() {
+    _motoristaController.dispose();
+    _operadorController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _irParaResumo() async {
+    final motoristaBytes = await _motoristaController.toPngBytes();
+    final operadorBytes = await _operadorController.toPngBytes();
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => ResumoEnvioScreen(
+          placaCavalo: widget.placaCavalo,
+          placa1Semireboque: widget.placa1Semireboque,
+          nomeMotorista: widget.nomeMotorista,
+          grupos: widget.grupos,
+          assinaturaMotorista: motoristaBytes,
+          assinaturaOperador: operadorBytes,
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -12,19 +61,12 @@ class AssinaturaScreen extends StatelessWidget {
         padding: const EdgeInsets.all(24),
         child: Column(
           children: [
-            const Text('Assinatura do Motorista'),
-            const SizedBox(height: 120, child: Placeholder()), // Aqui virá o quadro de assinatura
+            SignatureWidget(label: 'Assinatura do Motorista', controller: _motoristaController),
             const SizedBox(height: 32),
-            const Text('Assinatura do Operador'),
-            const SizedBox(height: 120, child: Placeholder()), // Aqui também
+            SignatureWidget(label: 'Assinatura do Operador', controller: _operadorController),
             const Spacer(),
             ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => const ResumoEnvioScreen()),
-                );
-              },
+              onPressed: _irParaResumo,
               child: const Text('Avançar para Resumo'),
             ),
           ],

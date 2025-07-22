@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
+import '../data/models.dart';
 
 class ChecklistItemWidget extends StatefulWidget {
-  final String titulo;
-  final String prazo;
-  final Function(String)? onObservacaoChanged;
-  final Function(String)? onStatusChanged;
+  final ChecklistItem item;
+  final void Function(String) onStatusChanged;
 
   const ChecklistItemWidget({
     super.key,
-    required this.titulo,
-    required this.prazo,
-    this.onObservacaoChanged,
-    this.onStatusChanged,
+    required this.item,
+    required this.onStatusChanged,
   });
 
   @override
@@ -19,86 +16,62 @@ class ChecklistItemWidget extends StatefulWidget {
 }
 
 class _ChecklistItemWidgetState extends State<ChecklistItemWidget> {
-  String? _statusSelecionado;
-  final TextEditingController _obsController = TextEditingController();
+  late String? statusSelecionado;
+
+  @override
+  void initState() {
+    super.initState();
+    statusSelecionado = widget.item.status.isEmpty ? null : widget.item.status;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
-      elevation: 2,
+      margin: const EdgeInsets.symmetric(vertical: 8),
       child: Padding(
-        padding: const EdgeInsets.all(12.0),
+        padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Título do item e prazo
+            Text(widget.item.nome, style: const TextStyle(fontWeight: FontWeight.bold)),
+            const SizedBox(height: 4),
+            Text('Prazo: ${widget.item.prazoBloqueio}'),
+            const SizedBox(height: 12),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: Text(
-                    widget.titulo,
-                    style: const TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                ),
-                Text(
-                  widget.prazo,
-                  style: const TextStyle(color: Colors.grey),
-                ),
-              ],
-            ),
-            const SizedBox(height: 8),
-            // Botões de status
-            Row(
-              children: ['OK', 'NOK', 'NA'].map((status) {
-                return Padding(
-                  padding: const EdgeInsets.only(right: 12.0),
-                  child: ChoiceChip(
-                    label: Text(status),
-                    selected: _statusSelecionado == status,
-                    onSelected: (selected) {
-                      setState(() {
-                        _statusSelecionado = selected ? status : null;
-                      });
-                      if (widget.onStatusChanged != null) {
-                        widget.onStatusChanged!(_statusSelecionado ?? '');
-                      }
-                    },
-                  ),
+              children: ['OK', 'NOK', 'N/A'].map((status) {
+                return Row(
+                  children: [
+                    Radio<String>(
+                      value: status,
+                      groupValue: statusSelecionado,
+                      onChanged: (value) {
+                        setState(() {
+                          statusSelecionado = value;
+                          widget.onStatusChanged(value!);
+                        });
+                      },
+                    ),
+                    Text(status),
+                    const SizedBox(width: 12),
+                  ],
                 );
               }).toList(),
             ),
-            const SizedBox(height: 8),
-            // Campo de observação se for NOK
-            if (_statusSelecionado == 'NOK')
+            if (statusSelecionado == 'NOK') ...[
+              const SizedBox(height: 8),
               TextField(
-                controller: _obsController,
-                onChanged: widget.onObservacaoChanged,
                 decoration: const InputDecoration(
-                  labelText: 'Observação',
+                  labelText: 'Observação (obrigatória se NOK)',
                   border: OutlineInputBorder(),
                 ),
-                maxLines: 2,
+                onChanged: (text) {
+                  widget.item.observacao = text;
+                },
               ),
-            const SizedBox(height: 8),
-            // Botão de foto (placeholder)
-            OutlinedButton.icon(
-              onPressed: () {
-                // Aqui vamos implementar o picker de imagem depois
-              },
-              icon: const Icon(Icons.camera_alt),
-              label: const Text('Adicionar Foto'),
-            ),
+            ],
           ],
         ),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    _obsController.dispose();
-    super.dispose();
   }
 }

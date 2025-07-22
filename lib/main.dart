@@ -3,20 +3,19 @@ import 'core/theme/app_theme.dart';
 import 'pages/login_screen.dart';
 
 void main() {
-  runApp(const BagamCheckApp());
+  runApp(const MyApp());
 }
 
-class BagamCheckApp extends StatelessWidget {
-  const BagamCheckApp({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'BAGAM Check',
       debugShowCheckedModeBanner: false,
-      theme: AppTheme.theme, // ✅ Usando seu tema centralizado
+      title: 'Checklist BAGAM',
+      theme: AppTheme.theme,
       home: const LoginScreen(),
     );
   }
 }
-

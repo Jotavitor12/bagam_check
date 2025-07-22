@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../data/checklist_data.dart';
+import '../widgets/grupo_widget.dart';
 import 'assinatura_screen.dart';
 
 class ChecklistScreen extends StatefulWidget {
@@ -10,18 +12,24 @@ class ChecklistScreen extends StatefulWidget {
 
 class _ChecklistScreenState extends State<ChecklistScreen> with TickerProviderStateMixin {
   late final TabController _tabController;
-  final int grupoCount = 15; // depois será 15
 
   @override
   void initState() {
-    _tabController = TabController(length: grupoCount, vsync: this);
     super.initState();
+    _tabController = TabController(length: grupos.length, vsync: this);
   }
 
   void _proximo() {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (_) => const AssinaturaScreen()),
+      MaterialPageRoute(
+        builder: (_) => AssinaturaScreen(
+          placaCavalo: 'ABC1234',
+          placa1Semireboque: 'DEF5678',
+          nomeMotorista: 'João Vitor',
+          grupos: grupos,
+        ),
+      ),
     );
   }
 
@@ -30,24 +38,17 @@ class _ChecklistScreenState extends State<ChecklistScreen> with TickerProviderSt
     return Scaffold(
       appBar: AppBar(
         title: const Text('Checklist'),
-          bottom: TabBar(
-            controller: _tabController,
-            isScrollable: true,
-            labelColor: Colors.green, // Cor quando está selecionado
-            unselectedLabelColor: Colors.white, // Cor quando não está selecionado
-            indicatorColor: Colors.green, // Linha de baixo do tab selecionado
-            tabs: List.generate(
-              grupoCount,
-                  (index) => Tab(text: 'Grupo ${index + 1}'),
-          ),
+        bottom: TabBar(
+          controller: _tabController,
+          isScrollable: true,
+          tabs: grupos.map((g) => Tab(text: g.nome)).toList(),
         ),
       ),
       body: TabBarView(
         controller: _tabController,
-        children: List.generate(
-          grupoCount,
-              (index) => Center(child: Text('Itens do Grupo ${index + 1}')),
-        ),
+        children: grupos.map((grupo) {
+          return GrupoWidget(grupo: grupo);
+        }).toList(),
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: _proximo,

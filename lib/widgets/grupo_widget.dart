@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'checklist_item_widget.dart';
 import '../data/models.dart';
+import 'checklist_item_widget.dart';
 
 class GrupoWidget extends StatelessWidget {
   final Grupo grupo;
@@ -9,15 +9,15 @@ class GrupoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      padding: const EdgeInsets.only(bottom: 80),
+      padding: const EdgeInsets.all(16),
       itemCount: grupo.itens.length,
       itemBuilder: (context, index) {
         final item = grupo.itens[index];
         return ChecklistItemWidget(
-          titulo: item.nome,
-          prazo: item.prazoBloqueio,
-          onStatusChanged: (status) => item.status = status,
-          onObservacaoChanged: (obs) => item.observacao = obs,
+          item: item,
+          onStatusChanged: (status) {
+            item.status = status;
+          },
         );
       },
     );
