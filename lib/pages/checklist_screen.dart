@@ -7,17 +7,19 @@ import 'assinatura_screen.dart';
 class ChecklistScreen extends StatefulWidget {
   final String nomeMotorista;
   final String placaCavalo;
-  final String placa1Semireboque;
+  final String placaCadastrada;
   final String r3;
   final String transportadora;
+  final String nomeOperador;
 
   const ChecklistScreen({
     super.key,
     required this.nomeMotorista,
     required this.placaCavalo,
-    required this.placa1Semireboque,
+    required this.placaCadastrada,
     required this.r3,
     required this.transportadora,
+    required this.nomeOperador,
   });
 
   @override
@@ -40,9 +42,10 @@ class _ChecklistScreenState extends State<ChecklistScreen> with TickerProviderSt
         builder: (_) => AssinaturaScreen(
           nomeMotorista: widget.nomeMotorista,
           placaCavalo: widget.placaCavalo,
-          placa1Semireboque: widget.placa1Semireboque,
+          placaCadastrada: widget.placaCadastrada,
           r3: widget.r3,
           transportadora: widget.transportadora,
+          nomeOperador: widget.nomeOperador,
           grupos: grupos,
         ),
       ),
@@ -72,7 +75,7 @@ class _ChecklistScreenState extends State<ChecklistScreen> with TickerProviderSt
       floatingActionButton: FloatingActionButton.extended(
         onPressed: _proximo,
         icon: const Icon(Icons.check),
-        label: const Text('Finalizar Checklist'),
+        label: const Text(''),
       ),
     );
   }

@@ -8,19 +8,21 @@ import 'resumo_envio_screen.dart';
 
 class AssinaturaScreen extends StatefulWidget {
   final String placaCavalo;
-  final String placa1Semireboque;
+  final String placaCadastrada;
   final String nomeMotorista;
   final String r3;
   final String transportadora;
+  final String nomeOperador;
   final List<Grupo> grupos;
 
   const AssinaturaScreen({
     super.key,
     required this.placaCavalo,
-    required this.placa1Semireboque,
+    required this.placaCadastrada,
     required this.nomeMotorista,
     required this.r3,
     required this.transportadora,
+    required this.nomeOperador,
     required this.grupos,
   });
 
@@ -48,10 +50,11 @@ class _AssinaturaScreenState extends State<AssinaturaScreen> {
       MaterialPageRoute(
         builder: (_) => ResumoEnvioScreen(
           placaCavalo: widget.placaCavalo,
-          placa1Semireboque: widget.placa1Semireboque,
+          placaCadastrada: widget.placaCadastrada,
           nomeMotorista: widget.nomeMotorista,
           r3: widget.r3,
           transportadora: widget.transportadora,
+          nomeOperador: widget.nomeOperador,
           grupos: widget.grupos,
           assinaturaMotorista: motoristaBytes,
           assinaturaOperador: operadorBytes,

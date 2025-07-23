@@ -10,7 +10,7 @@ class StorageService {
     return Directory('${dir.path}/checklists');
   }
 
-  static Future<void> saveChecklist(Grupo grupo, String placaCavalo, String placa1Semireboque) async {
+  static Future<void> saveChecklist(Grupo grupo, String placaCavalo, String placaCadastrada) async {
     final directory = await _getAppDirectory();
     if (!await directory.exists()) {
       await directory.create(recursive: true);
@@ -20,7 +20,7 @@ class StorageService {
     final data = StringBuffer();
     data.writeln('Checklist ID: $id');
     data.writeln('Cavalo: $placaCavalo');
-    data.writeln('1º Semirreboque: $placa1Semireboque');
+    data.writeln('Cadastrada: $placaCadastrada');
     data.writeln('---');
     for (final item in grupo.itens) {
       data.writeln('${item.nome}');
