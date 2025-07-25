@@ -22,7 +22,7 @@ class AppTheme {
         foregroundColor: Colors.white,
         centerTitle: true,
         titleTextStyle: TextStyle(
-          fontSize: 20,
+          fontSize: 25,
           fontWeight: FontWeight.bold,
           color: Colors.white,
         ),
@@ -40,14 +40,14 @@ class AppTheme {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
-          textStyle: const TextStyle(fontSize: 16),
+          textStyle: const TextStyle(fontSize: 20),
         ),
       ),
       textTheme: const TextTheme(
-        bodyLarge: TextStyle(fontSize: 16, color: textColor),
-        bodyMedium: TextStyle(fontSize: 14, color: textColor),
-        titleLarge: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: textColor),
-        labelLarge: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+        bodyLarge: TextStyle(fontSize: 18, color: textColor),
+        bodyMedium: TextStyle(fontSize: 18, color: textColor),
+        titleLarge: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: textColor),
+        labelLarge: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
       ),
     );
   }

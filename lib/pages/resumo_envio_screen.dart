@@ -60,13 +60,10 @@ Itens NÃO CONFORMES:
 $nokResumo
 ''';
 
-      await EmailHelper.enviarChecklist(
+      await EmailHelper.enviarChecklistComFallback(
         body: body,
         pdfAnexo: pdf,
-      );
-
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Checklist enviado com sucesso!')),
+        context: context,
       );
 
       Navigator.popUntil(context, (route) => route.isFirst);
@@ -93,6 +90,7 @@ $nokResumo
             Text('R3: $r3'),
             Text('Placa Cavalo: $placaCavalo'),
             Text('Placa Cadastrada: $placaCadastrada'),
+            Text('Operador: $nomeOperador'),
             const SizedBox(height: 16),
             const Text('Itens Não Conformes:', style: TextStyle(fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),
@@ -116,18 +114,26 @@ $nokResumo
                               padding: const EdgeInsets.symmetric(vertical: 4),
                               child: Text('Obs: ${item.observacao}'),
                             ),
-                          if (item.foto != null)
+                          if (item.fotos.isNotEmpty)
                             Padding(
                               padding: const EdgeInsets.only(top: 4),
                               child: SizedBox(
-                                height: 100,
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(8),
-                                  child: Image.file(
-                                    File(item.foto!.path),
-                                    fit: BoxFit.cover,
-                                    width: double.infinity,
-                                  ),
+                                height: 90,
+                                child: ListView.separated(
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: item.fotos.length,
+                                  separatorBuilder: (_, __) => const SizedBox(width: 8),
+                                  itemBuilder: (context, idx) {
+                                    return ClipRRect(
+                                      borderRadius: BorderRadius.circular(8),
+                                      child: Image.memory(
+                                        item.fotos[idx],
+                                        fit: BoxFit.cover,
+                                        width: 120,
+                                        height: 90,
+                                      ),
+                                    );
+                                  },
                                 ),
                               ),
                             ),

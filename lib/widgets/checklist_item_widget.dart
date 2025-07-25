@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import '../data/models.dart';
@@ -30,21 +30,20 @@ class _ChecklistItemWidgetState extends State<ChecklistItemWidget> {
     final picker = ImagePicker();
     final imagem = await picker.pickImage(source: ImageSource.camera);
     if (imagem != null) {
+      final bytes = await imagem.readAsBytes();
       setState(() {
-        widget.item.foto = File(imagem.path);
+        widget.item.fotos.add(bytes); // ✅ Agora armazena várias fotos
       });
     }
   }
 
-  void _abrirFoto() {
-    if (widget.item.foto != null) {
-      showDialog(
-        context: context,
-        builder: (_) => AlertDialog(
-          content: Image.file(widget.item.foto!),
-        ),
-      );
-    }
+  void _abrirFoto(Uint8List foto) {
+    showDialog(
+      context: context,
+      builder: (_) => AlertDialog(
+        content: Image.memory(foto),
+      ),
+    );
   }
 
   @override
@@ -99,13 +98,32 @@ class _ChecklistItemWidgetState extends State<ChecklistItemWidget> {
                     icon: const Icon(Icons.camera_alt),
                     tooltip: 'Tirar Foto',
                   ),
-                  IconButton(
-                    onPressed: _abrirFoto,
-                    icon: const Icon(Icons.folder),
-                    tooltip: 'Visualizar Foto',
-                  ),
                 ],
               ),
+              if (widget.item.fotos.isNotEmpty)
+                SizedBox(
+                  height: 80,
+                  child: ListView.separated(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: widget.item.fotos.length,
+                    separatorBuilder: (_, __) => const SizedBox(width: 8),
+                    itemBuilder: (context, index) {
+                      final foto = widget.item.fotos[index];
+                      return GestureDetector(
+                        onTap: () => _abrirFoto(foto),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(8),
+                          child: Image.memory(
+                            foto,
+                            width: 100,
+                            height: 80,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
             ],
           ],
         ),

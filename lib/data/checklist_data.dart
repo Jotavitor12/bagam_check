@@ -2,7 +2,7 @@ import 'models.dart';
 
 final List<Grupo> grupos = [
   Grupo(
-    nome: 'Grupo 1 - DOCUMENTOS | CONDIÇÃO MOTORISTA',
+    nome: 'GRUPO 1 - DOCUMENTOS | CONDIÇÃO MOTORISTA',
     itens: [
       ChecklistItem(nome: '1 - Possui Licença Ambiental válida, considerando a operação (municipal, estadual ou interestadual)? Desconsiderar caso a licença já esteja controlada no sistema VIBRA.', prazoBloqueio: 'Imediato'),
       ChecklistItem(nome: '2 - O motorista possui o crachá de identificação (transportadora e/ou cliente)?', prazoBloqueio: '3 dias'),
@@ -10,7 +10,7 @@ final List<Grupo> grupos = [
     ],
   ),
   Grupo(
-    nome: 'Grupo 2 - MOTORISTA',
+    nome: 'GRUPO 2 - MOTORISTA',
     itens: [
       ChecklistItem(nome: '4 - Motorista está com o uniforme 100% em algodão em duas peças, camisa manga longa aberta na frente com botões, sem bolso na camisa e usada por dentro da calça? (Uniformes com proteção RF serão aceitos)', prazoBloqueio: 'Imediato'),
       ChecklistItem(nome: '5 - Motorista está com calçado de segurança, tipo botina, sem biqueira de aço (verificar a condição e se o solado é antiestático)?', prazoBloqueio: 'Imediato'),
@@ -22,7 +22,7 @@ final List<Grupo> grupos = [
     ],
   ),
   Grupo(
-    nome: 'Grupo 3 - EMERGÊNCIA',
+    nome: 'GRUPO 3 - EMERGÊNCIA',
     itens: [
       ChecklistItem(nome: '11 - Possui 02 calços com dimensões mínimas de 150mm X 200mm X 150mm, sendo que para a combinação de veículo de carga - CVC, deve ter dois calços por veículo?', prazoBloqueio: 'Imediato'),
       ChecklistItem(nome: '12 - Possui jogo de ferramentas, contendo no mínimo: alicate universal, chave de fenda ou philips e chave de boca (fixa) apropriada para desconexão do cabo terra?', prazoBloqueio: 'Imediato'),
@@ -34,7 +34,7 @@ final List<Grupo> grupos = [
     ],
   ),
   Grupo(
-    nome: 'Grupo 4 - SINALIZAÇÃO',
+    nome: 'GRUPO 4 - SINALIZAÇÃO',
     itens: [
       ChecklistItem(nome: '18 - A capacidade dos compartimentos está demarcada na escotilha de enchimento e no bocal de descarga?', prazoBloqueio: '1 dia'),
       ChecklistItem(nome: '19 - Possui painel de segurança e rótulo de risco do produto transportado (verificar a cor e integridade)?', prazoBloqueio: 'Imediato'),
@@ -44,7 +44,7 @@ final List<Grupo> grupos = [
     ],
   ),
   Grupo(
-    nome: 'Grupo 5 - PNEUS E RODAS',
+    nome: 'GRUPO 5 - PNEUS E RODAS',
     itens: [
       ChecklistItem(nome: '23 - Os pneus no eixo direcional estão sem recape?', prazoBloqueio: 'Imediato'),
       ChecklistItem(nome: '24 - Os pneus estão em bom estado, com sulco mínimo de 1,6 mm (incluindo os estepes)?', prazoBloqueio: 'Imediato'),
@@ -52,14 +52,14 @@ final List<Grupo> grupos = [
     ],
   ),
   Grupo(
-    nome: 'Grupo 6 - SISTEMA DE FREIO',
+    nome: 'GRUPO 6 - SISTEMA DE FREIO',
     itens: [
       ChecklistItem(nome: '26 - Possui sistema de freio ABS (obrigatório para fabricados a partir de 2012) ou com funcionalidades similares?', prazoBloqueio: 'Imediato'),
       ChecklistItem(nome: '27 - Possui sistema de freio EBS (obrigatório para fabricados a partir de 2022)?', prazoBloqueio: 'Imediato'),
     ],
   ),
   Grupo(
-    nome: 'Grupo 7 - CAVALO',
+    nome: 'GRUPO 7 - CAVALO',
     itens: [
       ChecklistItem(nome: '28 - Possui certificado/Laudo de Emissão de Fumaça Negra (veículos movidos a óleo diesel), emitido por empresa especializada? (somente contratos PDL-T)', prazoBloqueio: '7 dias'),
       ChecklistItem(nome: '29 - Possui cinto de segurança de 03 (três) pontos (verificar estrutura, desgaste, engate, travamento e vida útil)?', prazoBloqueio: 'Imediato'),
@@ -84,7 +84,7 @@ final List<Grupo> grupos = [
     ],
   ),
   Grupo(
-    nome: 'Grupo 8 - SEMI-REBOQUE/ CARRETA',
+    nome: 'GRUPO 8 - SEMI-REBOQUE/ CARRETA',
     itens: [
       ChecklistItem(nome: '48 - Possui ligação tanque e chassi (continuidade elétrica)?', prazoBloqueio: 'Imediato'),
       ChecklistItem(nome: '49 - As setas dos compartimentos estão soldadas ou lacradas?', prazoBloqueio: 'Imediato'),
@@ -103,7 +103,7 @@ final List<Grupo> grupos = [
     ],
   ),
   Grupo(
-    nome: 'Grupo 9 - PROTEÇÕES',
+    nome: 'GRUPO 9 - PROTEÇÕES',
     itens: [
       ChecklistItem(nome: '62 - Possui proteção anti-queda para quem subir no CT com acionamento manual ou pneumático com dispositivo de travamento? (obrigatório para operação outbound)', prazoBloqueio: '15 dias'),
       ChecklistItem(nome: '63 - Possui proteção de grampos do eixo suspensor?', prazoBloqueio: 'Imediato'),
@@ -114,7 +114,7 @@ final List<Grupo> grupos = [
     ],
   ),
   Grupo(
-    nome: 'Grupo 10 - BOTTOM LOADING',
+    nome: 'GRUPO 10 - BOTTOM LOADING',
     itens: [
       ChecklistItem(nome: '68 - Os sensores overfill estão funcionando? Em unidades sem equipamento para realizar o teste, marcar como N/A.', prazoBloqueio: 'Imediato'),
       ChecklistItem(nome: '69 - Existe a interligação do sistema overfill e o aterramento entre carretas (bitrens)?', prazoBloqueio: '15 dias'),
@@ -124,7 +124,7 @@ final List<Grupo> grupos = [
     ],
   ),
   Grupo(
-    nome: 'Grupo 11 - DESCARGA',
+    nome: 'GRUPO 11 - DESCARGA',
     itens: [
       ChecklistItem(nome: '73 - Possui balde em alumínio, com cabo terra sem emenda e com capa transparente (carreta: 1 balde / carretas com bomba, BT, SBT: 2 baldes)?', prazoBloqueio: 'Imediato'),
       ChecklistItem(nome: '74 - Possui cabo terra isento de emendas (visualmente íntegro)?', prazoBloqueio: 'Imediato'),
@@ -136,7 +136,7 @@ final List<Grupo> grupos = [
     ],
   ),
   Grupo(
-    nome: 'Grupo 12 - TECNOLOGIAS',
+    nome: 'GRUPO 12 - TECNOLOGIAS',
     itens: [
       ChecklistItem(nome: '80 - Possui computador de bordo? (somente contratos PDL-T)', prazoBloqueio: 'Imediato'),
       ChecklistItem(nome: '81 - Possui sistema de câmeras (ao menos 04 câmeras instaladas: 01 frontal, 01 cabine, 01 lateral esquerda e 01 lateral direita)?', prazoBloqueio: 'Imediato'),
@@ -149,7 +149,7 @@ final List<Grupo> grupos = [
     ],
   ),
   Grupo(
-    nome: 'Grupo 13 - AVIAÇÃO',
+    nome: 'GRUPO 13 - AVIAÇÃO',
     itens: [
       ChecklistItem(nome: '88 - Possui tanques / tubulações epikotados de alumínio, aço inoxidável ou aço carbono revestido com tinta epóxi?', prazoBloqueio: 'Imediato'),
       ChecklistItem(nome: '89 - Possui gradis seletivos para carregamento top?', prazoBloqueio: 'Imediato'),
@@ -157,9 +157,9 @@ final List<Grupo> grupos = [
     ],
   ),
   Grupo(
-    nome: 'Grupo 14 - GNV',
+    nome: 'GRUPO 14 - GNV',
     itens: [
-      ChecklistItem(nome: '91 - elatório de inspeção anual foi realizado (deve ser feito por órgão de inspeção acreditado e conter a numeração do CSV)?', prazoBloqueio: 'Imediato'),
+      ChecklistItem(nome: '91 - Relatório de inspeção anual foi realizado (deve ser feito por órgão de inspeção acreditado e conter a numeração do CSV)?', prazoBloqueio: 'Imediato'),
       ChecklistItem(nome: '92 - Possui a informação do GNV como combustível no documento CRLV (deve conter a numeração do CSV)?', prazoBloqueio: 'Imediato'),
       ChecklistItem(nome: '93 - Possui certificação de cilindro emitido pelo Inmetro? Está válido (validade 20 anos)?', prazoBloqueio: 'Imediato'),
       ChecklistItem(nome: '94 - Foi realizada a requalificação de cilindro pelo Inmetro? Está válida (validade 5 anos)?', prazoBloqueio: 'Imediato'),
@@ -168,7 +168,7 @@ final List<Grupo> grupos = [
     ],
   ),
   Grupo(
-    nome: 'Grupo 15 - PLACA SOLAR',
+    nome: 'GRUPO 15 - PLACA SOLAR',
     itens: [
       ChecklistItem(nome: '97 - As placas estão ligadas diretamente na chave geral (com o desligamento da chave geral, o sistema solar deve estar completamente desenergizado, podendo ser verificado através do visor apagado)?', prazoBloqueio: 'Imediato'),
       ChecklistItem(nome: '98 - Os painéis elétricos estão íntegros? Utiliza caixa "EX" para proteção do circuito elétrico, sem fiação exposta?', prazoBloqueio: 'Imediato'),
